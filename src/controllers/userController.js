@@ -20,17 +20,8 @@ exports.getUserById = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+ 
 
-// Créer un utilisateur
-exports.createUser = async (req, res) => {
-  try {
-    const { name, email, password } = req.body;
-    const newUser = await User.create({ name, email, password });
-    res.status(201).json(newUser);
-  } catch (error) {
-    res.status(400).json({ message: error.message });
-  }
-};
 
 // Mettre à jour un utilisateur
 exports.updateUser = async (req, res) => {
