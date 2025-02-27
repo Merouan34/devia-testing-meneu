@@ -21,7 +21,23 @@ exports.getUserById = async (req, res) => {
   }
 };
  
-
+exports.createUser = async (req, res) => {
+    try {
+      const { name, email, password } = req.body;
+  
+      // Vérifier que tous les champs sont remplis
+      if (!name || !email || !password) {
+        return res.status(400).json({ message: "Tous les champs sont requis" });
+      }
+  
+      // Créer un nouvel utilisateur
+      const newUser = await User.create({ name, email, password });
+  
+      res.status(201).json(newUser); // Retourner l'utilisateur créé
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  }; 
 
 // Mettre à jour un utilisateur
 exports.updateUser = async (req, res) => {
